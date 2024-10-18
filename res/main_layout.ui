@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="windowModality">
+   <enum>Qt::NonModal</enum>
+  </property>
+  <property name="enabled">
+   <bool>true</bool>
+  </property>
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>963</width>
+    <height>513</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="mainLayout">
+   <property name="styleSheet">
+    <string notr="true">background-color: white;</string>
+   </property>
+   <widget class="QPushButton" name="startButton">
+    <property name="geometry">
+     <rect>
+      <x>40</x>
+      <y>300</y>
+      <width>111</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton {
+    background-color: #50cc34;
+    color: white;
+    font-weight: bold;
+    padding: 5px;
+}
+
+QPushButton:hover {
+    background-color: darkgreen;
+}
+
+QPushButton:pressed {
+    background-color: #50cc34;
+    padding-left: 3px;
+    padding-top: 3px;
+}
+</string>
+    </property>
+    <property name="text">
+     <string>BẮT ĐẦU</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="stopButton">
+    <property name="geometry">
+     <rect>
+      <x>190</x>
+      <y>300</y>
+      <width>111</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton {
+    background-color: red;
+    color: white;
+    font-weight: bold;
+    padding: 5px;
+}
+
+QPushButton:hover {
+    background-color: darkred;
+}
+
+QPushButton:pressed {
+    background-color: rgb(255, 0, 4);
+	color: white;
+    padding-left: 3px;
+    padding-top: 3px;
+}
+</string>
+    </property>
+    <property name="text">
+     <string>DỪNG LẠI</string>
+    </property>
+   </widget>
+   <widget class="QFrame" name="imageViewLayout">
+    <property name="geometry">
+     <rect>
+      <x>340</x>
+      <y>90</y>
+      <width>581</width>
+      <height>361</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: red;
+</string>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::StyledPanel</enum>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Raised</enum>
+    </property>
+    <widget class="QLabel" name="imageViewFrame">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>0</y>
+       <width>581</width>
+       <height>361</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QLabel" name="appTitle">
+    <property name="geometry">
+     <rect>
+      <x>460</x>
+      <y>30</y>
+      <width>341</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Segoe UI Semibold</family>
+      <pointsize>18</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>ĐIỂM DANH HỌC SINH</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="modelSelectButton">
+    <property name="geometry">
+     <rect>
+      <x>230</x>
+      <y>250</y>
+      <width>71</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton {
+    background-color: lightgray;
+    color: black;
+    font-weight: bold;
+    padding: 5px;
+}
+
+QPushButton:hover {
+    background-color: darkgray;
+}
+
+QPushButton:pressed {
+    background-color: lightgray;
+    padding-left: 3px;
+    padding-top: 3px;
+}
+</string>
+    </property>
+    <property name="text">
+     <string>Chọn</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="classNameTitle">
+    <property name="geometry">
+     <rect>
+      <x>40</x>
+      <y>160</y>
+      <width>261</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Tên lớp học:</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="pathToModelTitle">
+    <property name="geometry">
+     <rect>
+      <x>40</x>
+      <y>230</y>
+      <width>261</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Đường dẫn đến tệp dữ liệu:</string>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="cameraSelector">
+    <property name="geometry">
+     <rect>
+      <x>340</x>
+      <y>460</y>
+      <width>150</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>150</width>
+      <height>25</height>
+     </size>
+    </property>
+    <item>
+     <property name="text">
+      <string>Camera của laptop</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>USB Camera</string>
+     </property>
+    </item>
+   </widget>
+   <widget class="QComboBox" name="registerTypeSelector">
+    <property name="geometry">
+     <rect>
+      <x>510</x>
+      <y>460</y>
+      <width>150</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>150</width>
+      <height>25</height>
+     </size>
+    </property>
+    <item>
+     <property name="text">
+      <string>Nhận điện khuôn mặt</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Sử dụng vân tay</string>
+     </property>
+    </item>
+   </widget>
+   <widget class="QLineEdit" name="modelPathInput">
+    <property name="geometry">
+     <rect>
+      <x>40</x>
+      <y>250</y>
+      <width>181</width>
+      <height>31</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="classNameInput">
+    <property name="geometry">
+     <rect>
+      <x>40</x>
+      <y>180</y>
+      <width>261</width>
+      <height>31</height>
+     </rect>
+    </property>
+   </widget>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
