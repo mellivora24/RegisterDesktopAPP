@@ -1,5 +1,2 @@
-0 1
-1 2
-2 3
-3 0
-4 open
+0 Ma Quyet Thanh
+1 Thanh Quyet Ma

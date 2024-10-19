@@ -47,23 +47,24 @@ class viewEvents:
                     self.camera.start()
                 except Exception as e:
                     QMessageBox.warning(self.ui, "Lỗi", str(e))
+                    self.stopButtonClicked()
             else:
                 pass
 
     def stopButtonClicked(self):
         self.ui.stopButton.setEnabled(False)
         self.ui.startButton.setEnabled(True)
-        self.ui.cameraSelector.setEnabled(True)
-        self.ui.modelPathInput.setEnabled(True)
         self.ui.classNameInput.setEnabled(True)
-        self.ui.modelSelectButton.setEnabled(True)
-        self.ui.fingerPrintCOMInput.setEnabled(True)
         self.ui.registerTypeSelector.setEnabled(True)
 
         if self.ui.registerTypeSelector.currentIndex() == 0:
-            pass
+            self.ui.cameraSelector.setEnabled(True)
+            self.ui.modelPathInput.setEnabled(True)
+            self.ui.modelSelectButton.setEnabled(True)
+            if self.camera:
+                self.camera.stop()
         else:
-            pass
+            self.ui.fingerPrintCOMInput.setEnabled(True)
 
     def modelSelectButtonClicked(self):
         model_path = FileManager.load_folder()
