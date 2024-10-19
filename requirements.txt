@@ -1,1 +1,3 @@
 PyQt5==5.15.11
+pyserial==3.5
+opencv-python==4.10.0.84
