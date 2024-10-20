@@ -27,7 +27,7 @@
     <property name="geometry">
      <rect>
       <x>40</x>
-      <y>360</y>
+      <y>330</y>
       <width>111</width>
       <height>31</height>
      </rect>
@@ -59,7 +59,7 @@ QPushButton:pressed {
     <property name="geometry">
      <rect>
       <x>190</x>
-      <y>360</y>
+      <y>330</y>
       <width>111</width>
       <height>31</height>
      </rect>
@@ -88,7 +88,7 @@ QPushButton:pressed {
      <string>DỪNG LẠI</string>
     </property>
    </widget>
-   <widget class="QFrame" name="imageViewLayout">
+   <widget class="QFrame" name="cameraView">
     <property name="geometry">
      <rect>
       <x>340</x>
@@ -98,8 +98,7 @@ QPushButton:pressed {
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-color: red;
-</string>
+     <string notr="true"/>
     </property>
     <property name="frameShape">
      <enum>QFrame::StyledPanel</enum>
@@ -108,6 +107,9 @@ QPushButton:pressed {
      <enum>QFrame::Raised</enum>
     </property>
     <widget class="QLabel" name="imageViewFrame">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
      <property name="geometry">
       <rect>
        <x>0</x>
@@ -115,6 +117,9 @@ QPushButton:pressed {
        <width>581</width>
        <height>361</height>
       </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: rgb(156, 156, 156)</string>
      </property>
      <property name="text">
       <string/>
@@ -149,7 +154,7 @@ QPushButton:pressed {
     <property name="geometry">
      <rect>
       <x>230</x>
-      <y>240</y>
+      <y>210</y>
       <width>71</width>
       <height>31</height>
      </rect>
@@ -181,7 +186,7 @@ QPushButton:pressed {
     <property name="geometry">
      <rect>
       <x>40</x>
-      <y>150</y>
+      <y>120</y>
       <width>261</width>
       <height>16</height>
      </rect>
@@ -194,7 +199,7 @@ QPushButton:pressed {
     <property name="geometry">
      <rect>
       <x>40</x>
-      <y>220</y>
+      <y>190</y>
       <width>261</width>
       <height>16</height>
      </rect>
@@ -206,8 +211,8 @@ QPushButton:pressed {
    <widget class="QComboBox" name="cameraSelector">
     <property name="geometry">
      <rect>
-      <x>340</x>
-      <y>460</y>
+      <x>40</x>
+      <y>380</y>
       <width>150</width>
       <height>22</height>
      </rect>
@@ -232,8 +237,8 @@ QPushButton:pressed {
    <widget class="QComboBox" name="registerTypeSelector">
     <property name="geometry">
      <rect>
-      <x>510</x>
-      <y>460</y>
+      <x>40</x>
+      <y>410</y>
       <width>150</width>
       <height>22</height>
      </rect>
@@ -259,7 +264,7 @@ QPushButton:pressed {
     <property name="geometry">
      <rect>
       <x>40</x>
-      <y>240</y>
+      <y>210</y>
       <width>181</width>
       <height>31</height>
      </rect>
@@ -269,7 +274,7 @@ QPushButton:pressed {
     <property name="geometry">
      <rect>
       <x>40</x>
-      <y>170</y>
+      <y>140</y>
       <width>261</width>
       <height>31</height>
      </rect>
@@ -279,7 +284,7 @@ QPushButton:pressed {
     <property name="geometry">
      <rect>
       <x>40</x>
-      <y>290</y>
+      <y>260</y>
       <width>261</width>
       <height>16</height>
      </rect>
@@ -292,11 +297,170 @@ QPushButton:pressed {
     <property name="geometry">
      <rect>
       <x>40</x>
-      <y>310</y>
+      <y>280</y>
       <width>261</width>
       <height>31</height>
      </rect>
     </property>
+   </widget>
+   <widget class="QFrame" name="fingerPrintView">
+    <property name="geometry">
+     <rect>
+      <x>430</x>
+      <y>190</y>
+      <width>404</width>
+      <height>142</height>
+     </rect>
+    </property>
+    <layout class="QGridLayout" name="fingerPrintLayout">
+     <item row="2" column="0" colspan="3">
+      <widget class="QLabel" name="addFingerTitle">
+       <property name="text">
+        <string>Thêm vân tay ID:</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="2" colspan="2">
+      <widget class="QLabel" name="nameValue">
+       <property name="font">
+        <font>
+         <pointsize>14</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Nguyen Van A</string>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="3">
+      <widget class="QPushButton" name="addFingerButton">
+       <property name="minimumSize">
+        <size>
+         <width>50</width>
+         <height>25</height>
+        </size>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QPushButton {
+    background-color: #50cc34;
+    color: white;
+    font-weight: bold;
+    padding: 5px;
+}
+
+QPushButton:hover {
+    background-color: darkgreen;
+}
+
+QPushButton:pressed {
+    background-color: #50cc34;
+    padding-left: 3px;
+    padding-top: 3px;
+}
+</string>
+       </property>
+       <property name="text">
+        <string>Thêm</string>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="5">
+      <widget class="QPushButton" name="deleteFingerButton">
+       <property name="minimumSize">
+        <size>
+         <width>50</width>
+         <height>25</height>
+        </size>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QPushButton {
+    background-color: red;
+    color: white;
+    font-weight: bold;
+    padding: 5px;
+}
+
+QPushButton:hover {
+    background-color: darkred;
+}
+
+QPushButton:pressed {
+    background-color: rgb(255, 0, 4);
+	color: white;
+    padding-left: 3px;
+    padding-top: 3px;
+}
+</string>
+       </property>
+       <property name="text">
+        <string>Xóa</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="0" colspan="2">
+      <widget class="QLabel" name="nameTitle">
+       <property name="font">
+        <font>
+         <pointsize>14</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Tên:</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="4">
+      <widget class="QLabel" name="deleteFingerTitle">
+       <property name="text">
+        <string>Xóa vân tay ID:</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="1" colspan="3">
+      <widget class="QLabel" name="idValue">
+       <property name="font">
+        <font>
+         <pointsize>14</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>1</string>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="4">
+      <widget class="QLineEdit" name="deleteFingerIDInput">
+       <property name="minimumSize">
+        <size>
+         <width>0</width>
+         <height>25</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="0">
+      <widget class="QLabel" name="IDTitle">
+       <property name="font">
+        <font>
+         <pointsize>14</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>ID:</string>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="0" colspan="3">
+      <widget class="QLineEdit" name="addFingerIDInput">
+       <property name="minimumSize">
+        <size>
+         <width>0</width>
+         <height>25</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+    </layout>
    </widget>
   </widget>
  </widget>

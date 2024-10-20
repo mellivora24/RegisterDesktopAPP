@@ -6,9 +6,14 @@ class viewEvents:
     def __init__(self, ui):
         self.camera = None
         self.ui = ui
-        self.ui.stopButton.setEnabled(False)
-        self.ui.fingerPrintCOMInput.setEnabled(False)
+        self.guiInit()
         self.eventsConnect()
+
+    def guiInit(self):
+        self.ui.fingerPrintCOMInput.setEnabled(False)
+        self.ui.stopButton.setEnabled(False)
+        self.ui.fingerPrintView.setVisible(False)
+        self.ui.cameraView.setVisible(True)
 
     def eventsConnect(self):
         self.ui.stopButton.clicked.connect(self.stopButtonClicked)
@@ -77,11 +82,15 @@ class viewEvents:
             self.ui.cameraSelector.setEnabled(True)
             self.ui.modelSelectButton.setEnabled(True)
             self.ui.fingerPrintCOMInput.setEnabled(False)
+            self.ui.cameraView.setVisible(True)
+            self.ui.fingerPrintView.setVisible(False)
         else:
             self.ui.modelPathInput.setEnabled(False)
             self.ui.cameraSelector.setEnabled(False)
             self.ui.modelSelectButton.setEnabled(False)
             self.ui.fingerPrintCOMInput.setEnabled(True)
+            self.ui.cameraView.setVisible(False)
+            self.ui.fingerPrintView.setVisible(True)
 
     def onFingerPrintRead(self, data):
         pass
