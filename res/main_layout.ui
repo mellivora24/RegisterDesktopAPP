@@ -119,7 +119,7 @@ QPushButton:pressed {
       </rect>
      </property>
      <property name="styleSheet">
-      <string notr="true">background-color: rgb(156, 156, 156)</string>
+      <string notr="true"/>
      </property>
      <property name="text">
       <string/>
