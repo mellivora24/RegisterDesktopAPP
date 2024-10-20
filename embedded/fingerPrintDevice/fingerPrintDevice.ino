@@ -16,7 +16,7 @@ uint8_t getIDFromSerial() {
   uint8_t id = (uint8_t)Serial.parseInt();
   if (id == 0 && !Serial.peek()) return 255;
 
-  Serial.print("ID received = ");
+  Serial.println("ID received = ");
   Serial.println(id);
 
   return id;
@@ -62,7 +62,7 @@ void addFinger() {
         }
   }
 
-  Serial.println("FINGER_ADD_FAILED");
+  Serial.println("FINGER_FAILED");
 }
 
 void removeFinger() {
@@ -81,7 +81,7 @@ void removeFinger() {
   if (checkFingerprintID(id) && fingerPrintDevice.deleteModel(id) == FINGERPRINT_OK) {
     Serial.println("FINGER_DELETED");
     return;
-  } else Serial.println("FINGER_DELETE_FAILED");
+  } else Serial.println("FINGER_FAILED");
 }
 
 void setup() {

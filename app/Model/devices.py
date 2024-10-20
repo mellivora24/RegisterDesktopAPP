@@ -1,6 +1,7 @@
 import os
 import cv2
 import numpy as np
+from serial import Serial
 from PyQt5.QtGui import QImage, QPixmap
 from PyQt5.QtCore import QThread, pyqtSignal
 from tensorflow.keras.models import load_model
@@ -80,3 +81,28 @@ class Camera(QThread):
 
     def __del__(self):
         self.camera.release()
+
+class FingerPrint(QThread):
+    finger_print_read_signal = pyqtSignal(str)
+    def __init__(self, port):
+        super().__init__()
+        self.port = port
+        self.is_running = True
+        self.fingerPrint = Serial(port, 9600)
+
+    def run(self):
+        self.is_running = True
+        while self.is_running:
+            message = self.fingerPrint.readline().decode("utf-8")
+            message = message.replace("\n", "")
+            self.finger_print_read_signal.emit(message)
+
+    def send(self, message):
+        self.fingerPrint.write(message.encode("utf-8"))
+
+    def stop(self):
+        self.is_running = False
+        self.fingerPrint.close()
+
+    def __del__(self):
+        pass

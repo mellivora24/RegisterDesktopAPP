@@ -1,6 +1,7 @@
-from PyQt5.QtWidgets import QMessageBox
-import app.Model.file_manager as FileManager
 from app.Model.devices import Camera
+from PyQt5.QtWidgets import QMessageBox
+from app.Model.devices import FingerPrint
+import app.Model.file_manager as FileManager
 
 class viewEvents:
     def __init__(self, ui):
@@ -18,7 +19,9 @@ class viewEvents:
     def eventsConnect(self):
         self.ui.stopButton.clicked.connect(self.stopButtonClicked)
         self.ui.startButton.clicked.connect(self.startButtonClicked)
+        self.ui.addFingerButton.clicked.connect(self.addFingerButtonClicked)
         self.ui.modelSelectButton.clicked.connect(self.modelSelectButtonClicked)
+        self.ui.deleteFingerButton.clicked.connect(self.deleteFingerButtonClicked)
         self.ui.registerTypeSelector.currentIndexChanged.connect(self.registerTypeChanged)
 
     def startButtonClicked(self):
@@ -54,7 +57,13 @@ class viewEvents:
                     QMessageBox.warning(self.ui, "Lỗi", str(e))
                     self.stopButtonClicked()
             else:
-                pass
+                try:
+                    self.fingerPrint = FingerPrint(self.ui.fingerPrintCOMInput.text())
+                    self.fingerPrint.finger_print_read_signal.connect(self.onFingerPrintRead)
+                    self.fingerPrint.start()
+                except Exception as e:
+                    QMessageBox.warning(self.ui, "Lỗi", str(e))
+                    self.stopButtonClicked()
 
     def stopButtonClicked(self):
         self.ui.stopButton.setEnabled(False)
@@ -70,11 +79,29 @@ class viewEvents:
                 self.camera.stop()
         else:
             self.ui.fingerPrintCOMInput.setEnabled(True)
+            if self.fingerPrint:
+                self.fingerPrint.stop()
 
     def modelSelectButtonClicked(self):
         model_path = FileManager.load_folder()
         if model_path:
             self.ui.modelPathInput.setText(model_path)
+
+    def addFingerButtonClicked(self):
+        IDs = self.ui.addFingerIDInput.text()
+        if not IDs:
+            QMessageBox.warning(self.ui, "Cảnh báo", "Vui lòng nhập ID!")
+        else:
+            message = "a" + IDs
+            self.fingerPrint.send(message)
+
+    def deleteFingerButtonClicked(self):
+        IDs = self.ui.deleteFingerIDInput.text()
+        if not IDs:
+            QMessageBox.warning(self.ui, "Cảnh báo", "Vui lòng nhập ID!")
+        else:
+            message = "r" + IDs
+            self.fingerPrint.send(message)
 
     def registerTypeChanged(self):
         if self.ui.registerTypeSelector.currentIndex() == 0:
@@ -92,8 +119,26 @@ class viewEvents:
             self.ui.cameraView.setVisible(False)
             self.ui.fingerPrintView.setVisible(True)
 
-    def onFingerPrintRead(self, data):
-        pass
+    def onFingerPrintRead(self, message):
+        message = message.strip()
+        if message == "FINGER_ADDED":
+            QMessageBox.information(self.ui, "Thông báo", "Vân tay đã được thêm!")
+            self.ui.addFingerIDInput.setText("")
+        elif message == "FINGER_DELETED":
+            QMessageBox.information(self.ui, "Thông báo", "Vân tay đã được xóa!")
+            self.ui.deleteFingerIDInput.setText("")
+        elif message == "FINGER_FAILED":
+            QMessageBox.warning(self.ui, "Cảnh báo", "Thao tác thất bại!")
+        elif message == "FINGER_ID_NOT_NULL":
+            QMessageBox.warning(self.ui, "Cảnh báo", "ID đã tồn tại!")
+        elif message == "FINGER_ID_NULL":
+            self.ui.idValue.setText("ID không tồn tại!")
+        elif message == "INVALID_ID":
+            QMessageBox.warning(self.ui, "Cảnh báo", "ID không hợp lệ!")
+        elif message == "FINGER_EMPTY":
+            QMessageBox.warning(self.ui, "Cảnh báo", "Vân tay không tồn tại!")
+        elif message.isdigit():
+            self.ui.idValue.setText(message)
 
     def onUpdateImageView(self, frame):
         self.ui.imageViewFrame.setPixmap(frame)
