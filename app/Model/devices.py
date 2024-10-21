@@ -9,6 +9,7 @@ from tensorflow.keras.models import load_model
 class Camera(QThread):
     np.set_printoptions(suppress=True)
     update_image_signal = pyqtSignal(object)
+    send_information_signal = pyqtSignal(str)
 
     def __init__(self, camera_id):
         super().__init__()
@@ -25,7 +26,6 @@ class Camera(QThread):
             else:
                 raise FileNotFoundError(f"Model or labels file not found in {model_path} or {labels_path}")
         except Exception as e:
-            print(f"Error loading model: {e}")
             model = None
             labels = []
 
@@ -62,6 +62,7 @@ class Camera(QThread):
 
             # Update the frame
             self.update_display(frame)
+            self.send_information_signal.emit(name)
 
         except Exception as e:
             print(f"Error processing frame: {e}")

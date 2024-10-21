@@ -307,41 +307,59 @@ QPushButton:pressed {
     <property name="geometry">
      <rect>
       <x>430</x>
-      <y>190</y>
+      <y>160</y>
       <width>404</width>
-      <height>142</height>
+      <height>201</height>
      </rect>
     </property>
-    <layout class="QGridLayout" name="fingerPrintLayout">
-     <item row="2" column="0" colspan="3">
-      <widget class="QLabel" name="addFingerTitle">
-       <property name="text">
-        <string>Thêm vân tay ID:</string>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="2" colspan="2">
-      <widget class="QLabel" name="nameValue">
-       <property name="font">
-        <font>
-         <pointsize>14</pointsize>
-        </font>
-       </property>
-       <property name="text">
-        <string>Nguyen Van A</string>
-       </property>
-      </widget>
-     </item>
-     <item row="3" column="3">
-      <widget class="QPushButton" name="addFingerButton">
-       <property name="minimumSize">
-        <size>
-         <width>50</width>
-         <height>25</height>
-        </size>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">QPushButton {
+    <widget class="QLabel" name="addFingerTitle">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>90</y>
+       <width>99</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Thêm vân tay ID:</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="nameValue">
+     <property name="geometry">
+      <rect>
+       <x>81</x>
+       <y>43</y>
+       <width>144</width>
+       <height>28</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>14</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>Nguyen Van A</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="addFingerButton">
+     <property name="geometry">
+      <rect>
+       <x>156</x>
+       <y>160</y>
+       <width>50</width>
+       <height>28</height>
+      </rect>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>50</width>
+       <height>25</height>
+      </size>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton {
     background-color: #50cc34;
     color: white;
     font-weight: bold;
@@ -358,22 +376,28 @@ QPushButton:pressed {
     padding-top: 3px;
 }
 </string>
-       </property>
-       <property name="text">
-        <string>Thêm</string>
-       </property>
-      </widget>
-     </item>
-     <item row="3" column="5">
-      <widget class="QPushButton" name="deleteFingerButton">
-       <property name="minimumSize">
-        <size>
-         <width>50</width>
-         <height>25</height>
-        </size>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">QPushButton {
+     </property>
+     <property name="text">
+      <string>Thêm</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="deleteFingerButton">
+     <property name="geometry">
+      <rect>
+       <x>345</x>
+       <y>110</y>
+       <width>50</width>
+       <height>28</height>
+      </rect>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>50</width>
+       <height>25</height>
+      </size>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton {
     background-color: red;
     color: white;
     font-weight: bold;
@@ -391,76 +415,139 @@ QPushButton:pressed {
     padding-top: 3px;
 }
 </string>
-       </property>
-       <property name="text">
-        <string>Xóa</string>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="0" colspan="2">
-      <widget class="QLabel" name="nameTitle">
-       <property name="font">
-        <font>
-         <pointsize>14</pointsize>
-        </font>
-       </property>
-       <property name="text">
-        <string>Tên:</string>
-       </property>
-      </widget>
-     </item>
-     <item row="2" column="4">
-      <widget class="QLabel" name="deleteFingerTitle">
-       <property name="text">
-        <string>Xóa vân tay ID:</string>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="1" colspan="3">
-      <widget class="QLabel" name="idValue">
-       <property name="font">
-        <font>
-         <pointsize>14</pointsize>
-        </font>
-       </property>
-       <property name="text">
-        <string>1</string>
-       </property>
-      </widget>
-     </item>
-     <item row="3" column="4">
-      <widget class="QLineEdit" name="deleteFingerIDInput">
-       <property name="minimumSize">
-        <size>
-         <width>0</width>
-         <height>25</height>
-        </size>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="0">
-      <widget class="QLabel" name="IDTitle">
-       <property name="font">
-        <font>
-         <pointsize>14</pointsize>
-        </font>
-       </property>
-       <property name="text">
-        <string>ID:</string>
-       </property>
-      </widget>
-     </item>
-     <item row="3" column="0" colspan="3">
-      <widget class="QLineEdit" name="addFingerIDInput">
-       <property name="minimumSize">
-        <size>
-         <width>0</width>
-         <height>25</height>
-        </size>
-       </property>
-      </widget>
-     </item>
-    </layout>
+     </property>
+     <property name="text">
+      <string>Xóa</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="nameTitle">
+     <property name="geometry">
+      <rect>
+       <x>9</x>
+       <y>43</y>
+       <width>46</width>
+       <height>28</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>14</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>Tên:</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="deleteFingerTitle">
+     <property name="geometry">
+      <rect>
+       <x>231</x>
+       <y>90</y>
+       <width>88</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Xóa vân tay ID:</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="idValue">
+     <property name="geometry">
+      <rect>
+       <x>48</x>
+       <y>9</y>
+       <width>16</width>
+       <height>28</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>14</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>1</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="deleteFingerIDInput">
+     <property name="geometry">
+      <rect>
+       <x>231</x>
+       <y>110</y>
+       <width>108</width>
+       <height>25</height>
+      </rect>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>25</height>
+      </size>
+     </property>
+    </widget>
+    <widget class="QLabel" name="IDTitle">
+     <property name="geometry">
+      <rect>
+       <x>9</x>
+       <y>9</y>
+       <width>33</width>
+       <height>28</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>14</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>ID:</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="addFingerIDInput">
+     <property name="geometry">
+      <rect>
+       <x>9</x>
+       <y>110</y>
+       <width>137</width>
+       <height>25</height>
+      </rect>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>25</height>
+      </size>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="studentNameInput">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>160</y>
+       <width>137</width>
+       <height>25</height>
+      </rect>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>25</height>
+      </size>
+     </property>
+    </widget>
+    <widget class="QLabel" name="studentNameTitle">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>140</y>
+       <width>99</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Tên học sinh</string>
+     </property>
+    </widget>
    </widget>
   </widget>
  </widget>

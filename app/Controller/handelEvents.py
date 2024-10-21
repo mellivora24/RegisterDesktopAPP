@@ -2,6 +2,7 @@ from app.Model.devices import Camera
 from PyQt5.QtWidgets import QMessageBox
 from app.Model.devices import FingerPrint
 import app.Model.file_manager as FileManager
+from app.Services.google_sheet import GoogleSheet
 
 class viewEvents:
     def __init__(self, ui):
@@ -9,6 +10,7 @@ class viewEvents:
         self.ui = ui
         self.guiInit()
         self.eventsConnect()
+        self.google_sheet = GoogleSheet()
 
     def guiInit(self):
         self.ui.fingerPrintCOMInput.setEnabled(False)
@@ -52,6 +54,7 @@ class viewEvents:
                 try:
                     self.camera = Camera(self.ui.cameraSelector.currentIndex())
                     self.camera.update_image_signal.connect(self.onUpdateImageView)
+                    self.camera.send_information_signal.connect(self.informationSignalFromCamera)
                     self.camera.start()
                 except Exception as e:
                     QMessageBox.warning(self.ui, "Lỗi", str(e))
@@ -89,11 +92,13 @@ class viewEvents:
 
     def addFingerButtonClicked(self):
         IDs = self.ui.addFingerIDInput.text()
+        name = self.ui.studentNameInput.text()
         if not IDs:
             QMessageBox.warning(self.ui, "Cảnh báo", "Vui lòng nhập ID!")
         else:
             message = "a" + IDs
             self.fingerPrint.send(message)
+            self.google_sheet.create_data(self.ui.classNameInput.text(), IDs, name)
 
     def deleteFingerButtonClicked(self):
         IDs = self.ui.deleteFingerIDInput.text()
@@ -129,16 +134,26 @@ class viewEvents:
             self.ui.deleteFingerIDInput.setText("")
         elif message == "FINGER_FAILED":
             QMessageBox.warning(self.ui, "Cảnh báo", "Thao tác thất bại!")
+            self.ui.deleteFingerIDInput.setText("")
+            self.ui.addFingerIDInput.setText("")
         elif message == "FINGER_ID_NOT_NULL":
             QMessageBox.warning(self.ui, "Cảnh báo", "ID đã tồn tại!")
         elif message == "FINGER_ID_NULL":
             self.ui.idValue.setText("ID không tồn tại!")
         elif message == "INVALID_ID":
             QMessageBox.warning(self.ui, "Cảnh báo", "ID không hợp lệ!")
+            self.ui.deleteFingerIDInput.setText("")
+            self.ui.addFingerIDInput.setText("")
         elif message == "FINGER_EMPTY":
             QMessageBox.warning(self.ui, "Cảnh báo", "Vân tay không tồn tại!")
         elif message.isdigit():
-            self.ui.idValue.setText(message)
+            IDs = message
+            self.ui.idValue.setText(IDs)
+            self.google_sheet.push(self.ui.classNameInput.text(), IDs)
 
     def onUpdateImageView(self, frame):
         self.ui.imageViewFrame.setPixmap(frame)
+
+    def informationSignalFromCamera(self, information):
+        IDs = information.split(" ")[0]
+        self.google_sheet.push(self.ui.classNameInput.text(), IDs)
