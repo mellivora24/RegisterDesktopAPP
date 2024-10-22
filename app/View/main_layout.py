@@ -2,7 +2,7 @@ import sys
 from PyQt5.QtGui import QIcon
 from PyQt5.uic import loadUi
 from PyQt5.QtWidgets import QMainWindow
-from app.Controller.handelEvents import viewEvents
+from app.Controller.handelEvents import ViewEvents
 
 class MainLayout(QMainWindow):
     def __init__(self, ui_path, title="Main Layout", icon_path="../../res/icon.png"):
@@ -10,7 +10,7 @@ class MainLayout(QMainWindow):
         self.ui = loadUi(ui_path, self)
         self.setWindowTitle(title)
         self.setWindowIcon(QIcon(icon_path))
-        self.controller = viewEvents(self.ui)
+        self.controller = ViewEvents(self.ui)
         self.show()
 
 if __name__ == '__main__':

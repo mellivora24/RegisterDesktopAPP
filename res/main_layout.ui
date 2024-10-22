@@ -328,9 +328,9 @@ QPushButton:pressed {
     <widget class="QLabel" name="nameValue">
      <property name="geometry">
       <rect>
-       <x>81</x>
+       <x>61</x>
        <y>43</y>
-       <width>144</width>
+       <width>341</width>
        <height>28</height>
       </rect>
      </property>
@@ -340,7 +340,7 @@ QPushButton:pressed {
       </font>
      </property>
      <property name="text">
-      <string>Nguyen Van A</string>
+      <string>null</string>
      </property>
     </widget>
     <widget class="QPushButton" name="addFingerButton">
@@ -456,7 +456,7 @@ QPushButton:pressed {
       <rect>
        <x>48</x>
        <y>9</y>
-       <width>16</width>
+       <width>351</width>
        <height>28</height>
       </rect>
      </property>
@@ -466,7 +466,7 @@ QPushButton:pressed {
       </font>
      </property>
      <property name="text">
-      <string>1</string>
+      <string>null</string>
      </property>
     </widget>
     <widget class="QLineEdit" name="deleteFingerIDInput">

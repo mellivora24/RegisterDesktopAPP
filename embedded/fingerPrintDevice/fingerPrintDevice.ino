@@ -43,10 +43,7 @@ void addFinger() {
     Serial.println("INVALID_ID");
     return;
   }
-  if (checkFingerprintID(id)) {
-    Serial.println("FINGER_ID_NOT_NULL");
-    return;
-  }
+  if (!(checkFingerprintID(id) && fingerPrintDevice.deleteModel(id) == FINGERPRINT_OK)) Serial.println("FINGER_FAILED");
 
   if (fingerPrintDevice.getImage() != FINGERPRINT_OK) Serial.println("FINGER_NOT_FOUND");
   while (fingerPrintDevice.getImage() != FINGERPRINT_OK) {}
@@ -96,7 +93,7 @@ void loop() {
     char command = (char)Serial.read();
     switch (command) {
       case 'a':
-        Serial.flush();
+        Serial.flush();S
         addFinger();
         break;
       case 'r':
@@ -109,7 +106,6 @@ void loop() {
   }
 
   if (fingerPrintDevice.getImage() == FINGERPRINT_OK) {
-    Serial.println("FINGER_FOUND");
     uint8_t id = getFingerID();
     if (id != -1 && id != 255) Serial.println(id);
     else Serial.println("FINGER_ID_NULL");
