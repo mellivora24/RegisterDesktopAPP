@@ -1,0 +1,61 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36" version="24.7.16">
+  <diagram name="Trang-1" id="jRHbTl3D6uJXxw6LnVns">
+    <mxGraphModel dx="1050" dy="603" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="iMqCxlMi_qrNWxn5qCqz-1" value="Arduino Nano" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="240" y="240" width="120" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="iMqCxlMi_qrNWxn5qCqz-7" value="AS608" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="241" y="367" width="119" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="iMqCxlMi_qrNWxn5qCqz-9" value="Computer or laptop" style="image;points=[];aspect=fixed;html=1;align=center;shadow=0;dashed=0;image=img/lib/allied_telesis/computer_and_terminals/Personal_Computer.svg;" vertex="1" parent="1">
+          <mxGeometry x="517" y="168.12" width="135.6" height="183.77" as="geometry" />
+        </mxCell>
+        <mxCell id="iMqCxlMi_qrNWxn5qCqz-10" value="Google Sheet" style="shape=datastore;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="814" y="200" width="80" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="iMqCxlMi_qrNWxn5qCqz-11" value="" style="endArrow=classic;html=1;rounded=0;exitX=0.75;exitY=0;exitDx=0;exitDy=0;entryX=0.75;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="iMqCxlMi_qrNWxn5qCqz-7" target="iMqCxlMi_qrNWxn5qCqz-1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="173" y="484" as="sourcePoint" />
+            <mxPoint x="223" y="434" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="iMqCxlMi_qrNWxn5qCqz-12" value="" style="endArrow=classic;html=1;rounded=0;exitX=1;exitY=0.75;exitDx=0;exitDy=0;entryX=0.007;entryY=0.69;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="iMqCxlMi_qrNWxn5qCqz-1" target="iMqCxlMi_qrNWxn5qCqz-9">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="330" y="173" as="sourcePoint" />
+            <mxPoint x="511" y="277" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="iMqCxlMi_qrNWxn5qCqz-13" value="" style="endArrow=classic;html=1;rounded=0;entryX=1;entryY=0.25;entryDx=0;entryDy=0;exitX=0.007;exitY=0.577;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="iMqCxlMi_qrNWxn5qCqz-9" target="iMqCxlMi_qrNWxn5qCqz-1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="513" y="261" as="sourcePoint" />
+            <mxPoint x="478" y="203" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="iMqCxlMi_qrNWxn5qCqz-14" value="" style="endArrow=classic;html=1;rounded=0;exitX=0.25;exitY=1;exitDx=0;exitDy=0;entryX=0.25;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="iMqCxlMi_qrNWxn5qCqz-1" target="iMqCxlMi_qrNWxn5qCqz-7">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="127" y="374" as="sourcePoint" />
+            <mxPoint x="177" y="324" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="iMqCxlMi_qrNWxn5qCqz-16" value="" style="shape=flexArrow;endArrow=classic;startArrow=classic;html=1;rounded=0;entryX=0;entryY=0.7;entryDx=0;entryDy=0;" edge="1" parent="1" source="iMqCxlMi_qrNWxn5qCqz-9" target="iMqCxlMi_qrNWxn5qCqz-10">
+          <mxGeometry width="100" height="100" relative="1" as="geometry">
+            <mxPoint x="311" y="517" as="sourcePoint" />
+            <mxPoint x="823" y="311" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="iMqCxlMi_qrNWxn5qCqz-17" value="pyserial" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="409" y="227" width="59" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="iMqCxlMi_qrNWxn5qCqz-18" value="UART" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="275.5" y="311" width="50" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="iMqCxlMi_qrNWxn5qCqz-19" value="SpreadSheet" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="689" y="227" width="88" height="26" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

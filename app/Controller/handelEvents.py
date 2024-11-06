@@ -4,6 +4,7 @@ from app.Model.devices import FingerPrint
 import app.Model.file_manager as FileManager
 from app.Services.google_sheet import GoogleSheet
 import logging
+import time
 
 # Setup logging for errors
 logging.basicConfig(level=logging.ERROR)
@@ -16,6 +17,7 @@ class ViewEvents:
         self.google_sheet = GoogleSheet()
         self.gui_init()
         self.events_connect()
+        self.last_checkin_time = {}
 
     def gui_init(self):
         """
@@ -107,8 +109,10 @@ class ViewEvents:
 
         if self.ui.registerTypeSelector.currentIndex() == 0 and self.camera:
             self.camera.stop()
+            self.camera = None
         elif self.fingerPrint:
             self.fingerPrint.stop()
+            self.fingerPrint = None
 
     def model_select_button_clicked(self):
         """
@@ -129,8 +133,8 @@ class ViewEvents:
             QMessageBox.warning(self.ui, "Cảnh báo", "Vui lòng nhập ID!")
             return
 
-        self.fingerPrint.send(f"a{IDs}")
         try:
+            self.fingerPrint.send("a"+IDs)
             self.google_sheet.create_data(self.ui.classNameInput.text(), IDs, name)
         except Exception as e:
             QMessageBox.warning(self.ui, "Lỗi", str(e))
@@ -145,27 +149,37 @@ class ViewEvents:
             QMessageBox.warning(self.ui, "Cảnh báo", "Vui lòng nhập ID!")
             return
 
-        self.fingerPrint.send(f"r{IDs}")
-        self.google_sheet.delete(self.ui.classNameInput.text(), IDs)
+        try:
+            if self.fingerPrint:
+                self.fingerPrint.send("r" + IDs)
+                self.google_sheet.delete(self.ui.classNameInput.text(), IDs)
+            else:
+                QMessageBox.warning(self.ui, "Lỗi", "Thiết bị vân tay chưa được khởi tạo!")
+        except Exception as e:
+            QMessageBox.warning(self.ui, "Lỗi", str(e))
 
     def register_type_changed(self):
         """
         Toggles the UI between camera and fingerprint modes based on the register type selected.
         """
-        if self.ui.registerTypeSelector.currentIndex() == 0:  # Camera mode
-            self.ui.modelPathInput.setEnabled(True)
-            self.ui.cameraSelector.setEnabled(True)
-            self.ui.modelSelectButton.setEnabled(True)
-            self.ui.fingerPrintCOMInput.setEnabled(False)
-            self.ui.cameraView.setVisible(True)
-            self.ui.fingerPrintView.setVisible(False)
-        else:  # Fingerprint mode
-            self.ui.modelPathInput.setEnabled(False)
-            self.ui.cameraSelector.setEnabled(False)
-            self.ui.modelSelectButton.setEnabled(False)
-            self.ui.fingerPrintCOMInput.setEnabled(True)
-            self.ui.cameraView.setVisible(False)
-            self.ui.fingerPrintView.setVisible(True)
+        try:
+            if self.ui.registerTypeSelector.currentIndex() == 0:  # Camera mode
+                self.ui.modelPathInput.setEnabled(True)
+                self.ui.cameraSelector.setEnabled(True)
+                self.ui.modelSelectButton.setEnabled(True)
+                self.ui.fingerPrintCOMInput.setEnabled(False)
+                self.ui.cameraView.setVisible(True)
+                self.ui.fingerPrintView.setVisible(False)
+            else:  # Fingerprint mode
+                self.ui.modelPathInput.setEnabled(False)
+                self.ui.cameraSelector.setEnabled(False)
+                self.ui.modelSelectButton.setEnabled(False)
+                self.ui.fingerPrintCOMInput.setEnabled(True)
+                self.ui.cameraView.setVisible(False)
+                self.ui.fingerPrintView.setVisible(True)
+        except AttributeError as e:
+            logging.error(f"Error in register type change: {e}")
+            QMessageBox.warning(self.ui, "Lỗi", "Có lỗi xảy ra trong quá trình chuyển đổi loại đăng ký.")
 
     def on_fingerprint_read(self, message):
         """
@@ -175,16 +189,15 @@ class ViewEvents:
         if message == "FINGER_ADDED":
             QMessageBox.information(self.ui, "Thông báo", "Vân tay đã được thêm!")
             self.ui.addFingerIDInput.setText("")
+            self.ui.studentNameInput.setText("")
         elif message == "FINGER_DELETED":
             QMessageBox.information(self.ui, "Thông báo", "Vân tay đã được xóa!")
             self.ui.deleteFingerIDInput.setText("")
-        elif message == "FINGER_FAILED":
-            QMessageBox.warning(self.ui, "Cảnh báo", "Thao tác thất bại!")
-            self.clear_fingerprint_inputs()
         elif message == "FINGER_ID_NOT_NULL":
             QMessageBox.warning(self.ui, "Cảnh báo", "ID đã tồn tại!")
         elif message == "FINGER_ID_NULL":
             self.ui.idValue.setText("ID không tồn tại!")
+            self.ui.nameValue.setText("")
         elif message == "INVALID_ID":
             QMessageBox.warning(self.ui, "Cảnh báo", "ID không hợp lệ!")
             self.clear_fingerprint_inputs()
@@ -195,11 +208,29 @@ class ViewEvents:
 
     def handle_valid_fingerprint(self, IDs):
         """
-        Handles valid fingerprint ID by displaying the associated information.
+        Handles valid fingerprint ID by displaying the associated information and
+        ensuring that the push to Google Sheets only happens once within a set time period.
         """
+        # Lấy thời gian hiện tại
+        current_time = time.time()
+        cooldown_period = 300  # 5 phút
+
+        # Kiểm tra nếu ID đã được điểm danh trong vòng thời gian cooldown
+        if IDs in self.last_checkin_time:
+            elapsed_time = current_time - self.last_checkin_time[IDs]
+            if elapsed_time < cooldown_period:
+                print(f"ID {IDs} đã được điểm danh gần đây. Bỏ qua.")
+                return
+
+        # Cập nhật thời gian điểm danh của ID
+        self.last_checkin_time[IDs] = current_time
+
+        # Cập nhật UI và gửi thông tin đến Google Sheets
         self.ui.idValue.setText(IDs)
         student_name = self.google_sheet.get_information(self.ui.classNameInput.text(), IDs)[1]
         self.ui.nameValue.setText(student_name)
+
+        # Gửi request điểm danh
         self.google_sheet.push(self.ui.classNameInput.text(), IDs)
 
     def clear_fingerprint_inputs(self):
@@ -217,7 +248,34 @@ class ViewEvents:
 
     def information_signal_from_camera(self, information):
         """
-        Handles the information signal received from the camera.
+        Handles the information signal received from the camera with checks to avoid multiple requests.
         """
-        IDs = information.split(" ")[0]
-        self.google_sheet.push(self.ui.classNameInput.text(), IDs)
+        try:
+            data = information.split(" ")
+            if len(data) > 1:
+                IDs = str(int(data[0]) + 1)
+                name = " ".join(data[1:])
+            else:
+                IDs = str(int(data[0]) + 1)
+                name = ""
+
+            self.ui.idValue_2.setText(IDs)
+            self.ui.nameValue_2.setText(name)
+
+            # Kiểm tra nếu ID đã được điểm danh trong vòng thời gian cooldown
+            current_time = time.time()
+            cooldown_period = 300  # 5 phút
+
+            if IDs in self.last_checkin_time:
+                elapsed_time = current_time - self.last_checkin_time[IDs]
+                if elapsed_time < cooldown_period:
+                    return
+
+            # Cập nhật thời gian điểm danh của ID
+            self.last_checkin_time[IDs] = current_time
+
+            # Gửi request đến Google Sheets
+            self.google_sheet.push(self.ui.classNameInput.text(), IDs)
+
+        except IndexError:
+            print("Error: 'information' format is invalid.")

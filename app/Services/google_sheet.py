@@ -64,6 +64,8 @@ class GoogleSheet:
         If student info is provided, it updates the 'DATA' sheet with the student's details.
         """
         try:
+            self.sheet = self.google_sheet.open(sheet_name)
+        except SpreadsheetNotFound:
             self.sheet = self.google_sheet.create(sheet_name)
             self.sheet.add_worksheet(self.DATA_SHEET_NAME, rows=130, cols=2)
 
@@ -75,10 +77,8 @@ class GoogleSheet:
             for email in email_list:
                 self.sheet.share(email, perm_type='user', role='writer')
 
-            if finger_id and student_name:
-                self.update_data_sheet(finger_id, student_name)
-        except Exception as e:
-            logging.error(f"Error creating sheet: {e}")
+        if finger_id and student_name:
+            self.update_data_sheet(finger_id, student_name)
 
     def update_data_sheet(self, finger_id, student_name):
         """

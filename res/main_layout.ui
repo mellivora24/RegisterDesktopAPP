@@ -125,6 +125,78 @@ QPushButton:pressed {
       <string/>
      </property>
     </widget>
+    <widget class="QLabel" name="IDTitle_2">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>296</y>
+       <width>33</width>
+       <height>28</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>14</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>ID:</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="nameValue_2">
+     <property name="geometry">
+      <rect>
+       <x>60</x>
+       <y>330</y>
+       <width>341</width>
+       <height>28</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>14</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>null</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="idValue_2">
+     <property name="geometry">
+      <rect>
+       <x>50</x>
+       <y>296</y>
+       <width>351</width>
+       <height>28</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>14</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>null</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="nameTitle_2">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>330</y>
+       <width>46</width>
+       <height>28</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>14</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>Tên:</string>
+     </property>
+    </widget>
    </widget>
    <widget class="QLabel" name="appTitle">
     <property name="geometry">
